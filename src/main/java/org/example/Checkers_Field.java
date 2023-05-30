@@ -6,12 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import org.example.Checkers.*;
 
 public class Checkers_Field extends JPanel implements ActionListener, MouseListener {
 
     Checkers_Algorithm field = new Checkers_Algorithm();
-    boolean gameInProgress = false;
+    boolean game_In_Progress = false;
     int whose_Turn;
     int selected_Line, selected_Column;
     Checkers_Moves[] possible_Moves;
@@ -54,7 +53,7 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
     private void start_New_Game() {
         selected_Line = -1;
         selected_Column = -1;
-        gameInProgress = true;
+        game_In_Progress = true;
         field.placement_Start();
         whose_Turn = Checkers_Algorithm.White;
         possible_Moves = field.possible_Moves(Checkers_Algorithm.White);
@@ -84,7 +83,7 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
         Checkers.start_Game_Button.setEnabled(true);
         Checkers.surrender_Button.setEnabled(false);
         Checkers.restart_Button.setEnabled(false);
-        gameInProgress = false;
+        game_In_Progress = false;
     }
 
     void click_Cell(int line, int column) {
@@ -200,7 +199,7 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
             }
         }
 
-        if (gameInProgress) {
+        if (game_In_Progress) {
             g.setColor(new Color(134, 236, 46));
             for (int i = 0; i < possible_Moves.length; i++) {
                 g.drawRect(possible_Moves[i].from_Column * 50, possible_Moves[i].from_Line * 50, 50, 50);
@@ -223,7 +222,7 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
     }
 
     public void mousePressed(MouseEvent evt) {
-        if (!gameInProgress)
+        if (!game_In_Progress)
             Checkers.text_Info.setText("Click Start button to start a new game");
         else {
             setCursor(new Cursor(Cursor.HAND_CURSOR));
