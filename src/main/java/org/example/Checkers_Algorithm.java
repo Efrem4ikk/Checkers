@@ -7,7 +7,6 @@ import static java.lang.Math.abs;
 public class Checkers_Algorithm {
     int[][] board;
     static final int
-            Empty = 0,
             White = 1,
             Black = 2,
             White_King = 3,
@@ -64,13 +63,10 @@ public class Checkers_Algorithm {
             return false;
 
         if (user == 1) {
-            if (feature_On(from_line, from_column) == 1 && to_Line > from_line)
-                return false;
+            return feature_On(from_line, from_column) != 1 || to_Line <= from_line;
         } else {
-            if (feature_On(from_line, from_column) == 2 && to_Line < from_line)
-                return false;
+            return feature_On(from_line, from_column) != 2 || to_Line >= from_line;
         }
-        return true;
     }
 
     private boolean can_Eat(int user, int from_Line, int from_column, int enemy_Line, int enemy_Column, int to_Line, int to_Column) {
@@ -82,15 +78,12 @@ public class Checkers_Algorithm {
         if (user == 1) {
             if (feature_On(enemy_Line, enemy_Column) != 2 && feature_On(enemy_Line, enemy_Column) != 4)
                 return false;
-            if (feature_On(from_Line, from_column) == 1 && to_Line > from_Line)
-                return false;
+            return feature_On(from_Line, from_column) != 1 || to_Line <= from_Line;
         } else {
             if (feature_On(enemy_Line, enemy_Column) != 1 && feature_On(enemy_Line, enemy_Column) != 3)
                 return false;
-            if (feature_On(from_Line, from_column) == 2 && to_Line < from_Line)
-                return false;
+            return feature_On(from_Line, from_column) != 2 || to_Line >= from_Line;
         }
-        return true;
     }
 
     Checkers_Moves[] possible_Moves(int user) {
