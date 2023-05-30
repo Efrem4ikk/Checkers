@@ -24,8 +24,8 @@ public class Checkers extends JPanel {
 
     public Checkers() {
         setLayout(null);
-        setPreferredSize(new Dimension(1600, 1300));
-        setBackground(new Color(132, 115, 236));
+        setPreferredSize(new Dimension(800, 650));
+        setBackground(new Color(52, 134, 134));
         Checkers_Field board = new Checkers_Field();
         add(board);
         add(text_Info);
@@ -33,11 +33,11 @@ public class Checkers extends JPanel {
         add(start_Game_Button);
         add(surrender_Button);
         add(restart_Button);
-        board.setBounds(300, 150, 1000, 1000);
-        text_Info.setBounds(250, 70, 1100, 60);
-        restart_info.setBounds(250, 30, 1100, 50);
-        start_Game_Button.setBounds(400, 1175, 300, 60);
-        surrender_Button.setBounds(900, 1175, 300, 60);
-        restart_Button.setBounds(1325, 65, 240, 60);
+        board.setBounds(150, 75, 500, 500);
+        text_Info.setBounds(125, 35, 550, 30);
+        restart_info.setBounds(125, 15, 550, 25);
+        start_Game_Button.setBounds(200, 587, 150, 30);
+        surrender_Button.setBounds(450, 587, 150, 30);
+        restart_Button.setBounds(662, 62, 120, 30);
     }
 }
