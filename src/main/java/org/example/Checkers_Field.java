@@ -26,18 +26,17 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
         Checkers.surrender_Button = new JButton("Surrender");
         Checkers.surrender_Button.addActionListener(this);
         Checkers.surrender_Button.setFont(new Font("DialogInput", Font.BOLD, 20));
-        Checkers.surrender_Button.setBackground(new Color(51, 119, 108));
+        Checkers.surrender_Button.setBackground(new Color(118, 67, 178));
         Checkers.start_Game_Button = new JButton("Start GAME");
         Checkers.start_Game_Button.setFont(new Font("DialogInput", Font.BOLD, 15));
         Checkers.start_Game_Button.addActionListener(this);
-        Checkers.start_Game_Button.setBackground(new Color(51, 119, 108));
+        Checkers.start_Game_Button.setBackground(new Color(118, 67, 178));
         Checkers.restart_Button = new JButton("Restart");
         Checkers.restart_Button.setFont(new Font("DialogInput", Font.BOLD, 15));
-        Checkers.restart_Button.setBackground(new Color(51, 119, 108));
+        Checkers.restart_Button.setBackground(new Color(118, 67, 178));
         Checkers.restart_Button.addActionListener(this);
         Checkers.surrender_Button.setEnabled(false);
         Checkers.restart_Button.setEnabled(false);
-
     }
 
     public void actionPerformed(ActionEvent evt) {
@@ -47,7 +46,7 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
         if (src == Checkers.surrender_Button)
             surrender();
         if (src == Checkers.restart_Button)
-            doRestart();
+            restart();
     }
 
     private void start_New_Game() {
@@ -71,10 +70,9 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
             game_Over("Black surrendered. White win");
     }
 
-    private void doRestart() {
+    private void restart() {
         start_New_Game();
         Checkers.restart_info.setText("Game has been restarted");
-
     }
 
     private void game_Over(String info) {
@@ -89,8 +87,8 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
     void click_Cell(int line, int column) {
         Checkers.restart_info.setText("");
 
-        for (int i = 0; i < possible_Moves.length; i++)
-            if (possible_Moves[i].from_Line == line && possible_Moves[i].from_Column == column) {
+        for (Checkers_Moves possible_move : possible_Moves)
+            if (possible_move.from_Line == line && possible_move.from_Column == column) {
                 selected_Line = line;
                 selected_Column = column;
                 if (whose_Turn == Checkers_Algorithm.White)
@@ -106,10 +104,10 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
             return;
         }
 
-        for (int i = 0; i < possible_Moves.length; i++)
-            if (possible_Moves[i].from_Line == selected_Line && possible_Moves[i].from_Column == selected_Column
-                    && possible_Moves[i].to_Line == line && possible_Moves[i].to_Column == column) {
-                make_Moves(possible_Moves[i]);
+        for (Checkers_Moves possible_move : possible_Moves)
+            if (possible_move.from_Line == selected_Line && possible_move.from_Column == selected_Column
+                    && possible_move.to_Line == line && possible_move.to_Column == column) {
+                make_Moves(possible_move);
                 return;
             }
         Checkers.text_Info.setText("Click on the cell you want to move to");
@@ -201,9 +199,9 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
 
         if (game_In_Progress) {
             g.setColor(new Color(134, 236, 46));
-            for (int i = 0; i < possible_Moves.length; i++) {
-                g.drawRect(possible_Moves[i].from_Column * 50, possible_Moves[i].from_Line * 50, 50, 50);
-                g.drawRect(1 + possible_Moves[i].from_Column * 50, 1 + possible_Moves[i].from_Line * 50, 49, 49);
+            for (Checkers_Moves possible_move : possible_Moves) {
+                g.drawRect(possible_move.from_Column * 50, possible_move.from_Line * 50, 50, 50);
+                g.drawRect(1 + possible_move.from_Column * 50, 1 + possible_move.from_Line * 50, 49, 49);
             }
 
             if (selected_Line >= 0 && selected_Line < 10) {
@@ -211,10 +209,10 @@ public class Checkers_Field extends JPanel implements ActionListener, MouseListe
                 g.drawRect(selected_Column * 50, selected_Line * 50, 50, 50);
                 g.drawRect(1 + selected_Column * 50, 1 + selected_Line * 50, 49, 49);
                 g.setColor(new Color(211, 18, 46));
-                for (int i = 0; i < possible_Moves.length; i++) {
-                    if (possible_Moves[i].from_Column == selected_Column && possible_Moves[i].from_Line == selected_Line) {
-                        g.drawRect(possible_Moves[i].to_Column * 50, possible_Moves[i].to_Line * 50, 50, 50);
-                        g.drawRect(1 + possible_Moves[i].to_Column * 50, 1 + possible_Moves[i].to_Line * 50, 49, 49);
+                for (Checkers_Moves possible_move : possible_Moves) {
+                    if (possible_move.from_Column == selected_Column && possible_move.from_Line == selected_Line) {
+                        g.drawRect(possible_move.to_Column * 50, possible_move.to_Line * 50, 50, 50);
+                        g.drawRect(1 + possible_move.to_Column * 50, 1 + possible_move.to_Line * 50, 49, 49);
                     }
                 }
             }

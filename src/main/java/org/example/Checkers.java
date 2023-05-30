@@ -1,7 +1,8 @@
 package org.example;
 
-import java.awt.*;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class Checkers extends JPanel {
     public static JLabel text_Info, restart_info;
@@ -25,7 +26,7 @@ public class Checkers extends JPanel {
     public Checkers() {
         setLayout(null);
         setPreferredSize(new Dimension(800, 650));
-        setBackground(new Color(52, 134, 134));
+        setBackground(new Color(129, 36, 250));
         Checkers_Field board = new Checkers_Field();
         add(board);
         add(text_Info);
